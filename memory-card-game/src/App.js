@@ -1,9 +1,11 @@
+import React from 'react';
+import Header from './components/Header';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      Memory Project is ready to be built!!
+      <Header />
     </div>
   );
 }
