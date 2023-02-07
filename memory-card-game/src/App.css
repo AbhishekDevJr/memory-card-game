@@ -95,7 +95,6 @@ header {
 }
 
 .card1, .card2, .card3, .card4, .card5, .card6, .card7, .card8, .card9, .card10, .card11, .card12 {
-  outline : 1px solid blue;
   min-height : 180px;
   min-width : 160px;
   border-radius : 20px;
@@ -127,6 +126,12 @@ header {
   }
 
   .card3, .card4, .card7, .card8, .card11, .card12 {
+    margin-top : 30px;
+  }
+}
+
+@media(max-width : 382px) {
+  .card2, .card6, .card10 {
     margin-top : 30px;
   }
 }
