@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
 *{
   box-sizing : border-box;
+  font-family: 'Nunito', sans-serif;
 }
 
 header {
@@ -46,4 +49,47 @@ header {
   width : 30px;
   height : 30px;
   border-radius : 50%;
+}
+
+.container {
+  display : flex;
+  flex-direction : row;
+  justify-content : center;
+  align-items : center;
+  padding : 2.5% 0 2.5% 0;
+}
+
+.cScore, .bScore {
+  font-size : 1.2rem;
+  font-weight : 600;
+  color : rgb(56, 56, 56);
+  width : 10%;
+  text-align : center;
+  min-width : 225px;
+  border-radius : 20px;
+  padding : 8px 0 8px 0;
+  margin : 0 3% 0 3%;
+  box-shadow : 1px 3px 18px 1px rgba(0, 0, 0, 0.438);
+}
+
+@media(max-width : 768px){
+  .container {
+    display : flex;
+    flex-direction : column;
+    justify-content : center;
+    align-items : center;
+    padding : 2% 0 2% 0;
+  }
+
+  .cScore, .bScore {
+    margin : 20px 0 20px 0;
+  }
+}
+
+.cScore {
+  background-color : rgb(255, 181, 181);
+}
+
+.bScore {
+  background-color : rgb(181, 255, 181);
 }
