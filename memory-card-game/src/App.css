@@ -93,3 +93,39 @@ header {
 .bScore {
   background-color : rgb(181, 255, 181);
 }
+
+.card1, .card2, .card3, .card4, .card5, .card6, .card7, .card8, .card9, .card10, .card11, .card12 {
+  outline : 1px solid blue;
+  min-height : 180px;
+  min-width : 160px;
+  border-radius : 20px;
+  box-shadow : rgb(0 0 0 / 35%) 0px 5px 15px;
+  background-color : rgb(238, 238, 238);
+  cursor : pointer;
+  margin : 0 15px 0 15px;
+}
+
+.row1, .row2, .row3 {
+  display : flex;
+  flex-direction : row;
+  justify-content : center;
+  align-items : center;
+  padding-bottom : 30px;
+  flex-wrap: wrap;
+}
+
+@media(max-width : 766px) {
+  .card4, .card8, .card12 {
+    margin-top : 30px;
+  }
+}
+
+@media(max-width : 570px) {
+  .card4, .card8, .card12 {
+    margin-top : 0;
+  }
+
+  .card3, .card4, .card7, .card8, .card11, .card12 {
+    margin-top : 30px;
+  }
+}
