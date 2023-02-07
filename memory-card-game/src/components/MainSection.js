@@ -2,13 +2,34 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 
 const MainSection = () => {
+    const [imgSrc, setImgSrc] = useState({
+        poke1 : ['poke1.png', 'Charmeleon'],
+        poke2 : ['poke2.png', 'Bulbasaur'],
+        poke3 : ['poke3.1.png', 'Venusaur'],
+        poke4 : ['poke4.png', 'Squirtle'],
+        poke5 : ['poke5.png','Ivysaur'],
+        poke6 : ['poke6.png','Wartortle'],
+        poke7 : ['poke7.png','Charmander'],
+        poke8 : ['poke8.png','Blastoise'],
+        poke9 : ['poke9.png','Charizard'],
+        poke10 : ['poke10.png','Caterpie'],
+        poke11 : ['poke11.png','Metapod'],
+        poke12 : ['poke12.png','Butterfree'],
+    });
+
+    const cardHandler = (e) => {
+        setImgSrc({
+            poke1 : ['poke1.png', 'Charmander']
+        });
+    }
+
     return(
         <div className = "main-sec">
             <div className = "main-container">
                 <div className = "row1">
-                    <div className = "card1">
-                        <img src = "" alt = "Pokemon Img" />
-                        <p>{'Placeholder'}</p>
+                    <div onClick = {cardHandler} className = "card1">
+                        <img src = {imgSrc.poke1[0]} alt = "Pokemon Img" />
+                        <p>{imgSrc.poke1[1]}</p>
                     </div>
 
                     <div className = "card2">
