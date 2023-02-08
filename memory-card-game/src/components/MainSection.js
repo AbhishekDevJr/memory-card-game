@@ -2,6 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 
 const MainSection = () => {
+    const [currentScore, setCurrentScore] = useState(0);
     const [imgSrcI, setimgSrcI] = useState([
         {
             src : 'poke1.png',
@@ -104,6 +105,18 @@ const MainSection = () => {
         },
 ];
 
+    useEffect(() => {
+        tempArray.forEach((pokeObj, index, arr) => {
+            let  randomIndex = Math.floor(Math.random() * (arr.length));
+            let temp = arr[index];
+            arr[index] = arr[randomIndex];
+            arr[randomIndex] = temp;
+        });
+        // console.log('Checking Temp Array--> ', tempArray);
+        // console.log('Calling randomizing images function once when component mounts');
+        setimgSrcI(tempArray);
+    }, []);
+
     const cardHandler = (e) => {
         tempArray.forEach((pokeObj, index, arr) => {
             let  randomIndex = Math.floor(Math.random() * (arr.length));
@@ -113,6 +126,20 @@ const MainSection = () => {
         });
         console.log('Checking Temp Array--> ', tempArray);
         setimgSrcI(tempArray);
+
+        //Building Main Game Logic
+
+        let playerChoicesArray = [];
+        console.log('Event Object --->', e.currentTarget.lastChild.textContent);
+        playerChoicesArray.push(e.currentTarget.lastChild.textContent);
+        console.log('Player Choices--> ', playerChoicesArray);
+        
+        if(playerChoicesArray.length > 1){
+
+        }
+        else{
+
+        }
     }
 
     return(
