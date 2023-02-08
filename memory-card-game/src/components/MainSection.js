@@ -5,6 +5,7 @@ let playerChoicesArray = [];
 const MainSection = (props) => {
     const [currentScore, setCurrentScore] = useState(0);
     const [bestScore, setBestScore] = useState(0);
+    const [prevBestScore, setPrevBestScore] = useState(0);
     const [imgSrcI, setimgSrcI] = useState([
         {
             src : 'poke1.png',
@@ -114,8 +115,6 @@ const MainSection = (props) => {
             arr[index] = arr[randomIndex];
             arr[randomIndex] = temp;
         });
-        // console.log('Checking Temp Array--> ', tempArray);
-        // console.log('Calling randomizing images function once when component mounts');
         setimgSrcI(tempArray);
     }, []);
 
@@ -127,38 +126,67 @@ const MainSection = (props) => {
             arr[index] = arr[randomIndex];
             arr[randomIndex] = temp;
         });
-        console.log('Checking Temp Array--> ', tempArray);
+        
         setimgSrcI(tempArray);
 
         //Building Main Game Logic
-        console.log('Event Object --->', e.currentTarget.lastChild.textContent);
-        // playerChoicesArray.push(e.currentTarget.lastChild.textContent);
-        console.log('Player Choices--> ', playerChoicesArray);
            
-            // playerChoicesArray.push(e.currentTarget.lastChild.textContent);
             if(playerChoicesArray.includes(e.currentTarget.lastChild.textContent)){
-                console.log('Nested If block--> Current Selection Matches one of the previous Selection.');
-                console.log('Game Over IF Block--->','Current Score-->', currentScore, 'Best Score-->', bestScore);
-                setBestScore(currentScore);
-                setCurrentScore(0);
+                console.log('Game Over IF Block');
+                if(prevBestScore === 0){
+                    setPrevBestScore(currentScore);
+                    setBestScore(currentScore);
+                    setCurrentScore(0);
+                }
+                else{
+                    if(currentScore >= prevBestScore){
+                        setBestScore(currentScore);
+                        setPrevBestScore(currentScore);
+                        setCurrentScore(0);
+                    }
+                    else{
+                        setBestScore(prevBestScore);
+                        setCurrentScore(0);
+                    }
+                }
+
+                playerChoicesArray = [];
             }
             else{
-                console.log('Players Choice --->', e.currentTarget.lastChild.textContent, 'Current-Score :', currentScore);
+                console.log('Game in progress ELSE block');
                 playerChoicesArray.push(e.currentTarget.lastChild.textContent);
                 setCurrentScore(currentScore + 1);
-                setBestScore(currentScore + 1);
-                (console.log('Game in progress--> ', 'Current Score--> ', currentScore, 'Best Score-->', bestScore))
-                console.log('Players Choices Array-->', playerChoicesArray);
-                props.changeScoreFun(currentScore, bestScore);
+                if(prevBestScore > 0){
+                    if(currentScore >= prevBestScore){
+                        setBestScore(currentScore);
+                    }
+                    else{
+                        setBestScore(prevBestScore);
+                    }
+                }
+                else{
+                    setBestScore(bestScore + 1);
+                }
+
+                if(bestScore === 12){
+                    props.changeScoreFun((currentScore+1), (bestScore));
+                }
+                else{
+                    props.changeScoreFun((currentScore+1), (bestScore+1));
+                }
+                
             }
     }
-    
+
     useEffect(() => {
-        console.log('Use Effect Hooks state value--> ', currentScore, bestScore);
+        if(currentScore > bestScore){
+            setBestScore(currentScore);
+        }
     }, [currentScore, bestScore]);
 
     return(
         <div className = "main-sec">
+            <h1>Current Score:-{currentScore} Best Score:-{bestScore}</h1>
             <div className = "main-container">
                 <div className = "row1">
                     <div onClick = {cardHandler} className = "card1">

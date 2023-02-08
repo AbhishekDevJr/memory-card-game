@@ -2,7 +2,6 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 
 const Score = (props) => {
-    console.log('Props in Score Component-- >', props);
     return(
         <div className = "score">
             <div className = "container">
