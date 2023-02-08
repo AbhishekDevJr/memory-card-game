@@ -2,7 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 let playerChoicesArray = [];
 
-const MainSection = () => {
+const MainSection = (props) => {
     const [currentScore, setCurrentScore] = useState(0);
     const [bestScore, setBestScore] = useState(0);
     const [imgSrcI, setimgSrcI] = useState([
@@ -143,14 +143,19 @@ const MainSection = () => {
                 setCurrentScore(0);
             }
             else{
-                console.log('Players Choice --->', e.currentTarget.lastChild.textContent);
+                console.log('Players Choice --->', e.currentTarget.lastChild.textContent, 'Current-Score :', currentScore);
                 playerChoicesArray.push(e.currentTarget.lastChild.textContent);
-                setCurrentScore((currentScore + 1));
-                setBestScore(currentScore);
-                console.log('Game in progress--> ', 'Current Score--> ', currentScore, 'Best Score-->', bestScore);
+                setCurrentScore(currentScore + 1);
+                setBestScore(currentScore + 1);
+                (console.log('Game in progress--> ', 'Current Score--> ', currentScore, 'Best Score-->', bestScore))
                 console.log('Players Choices Array-->', playerChoicesArray);
+                props.changeScoreFun(currentScore, bestScore);
             }
     }
+    
+    useEffect(() => {
+        console.log('Use Effect Hooks state value--> ', currentScore, bestScore);
+    }, [currentScore, bestScore]);
 
     return(
         <div className = "main-sec">
