@@ -1,8 +1,10 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
+let playerChoicesArray = [];
 
 const MainSection = () => {
     const [currentScore, setCurrentScore] = useState(0);
+    const [bestScore, setBestScore] = useState(0);
     const [imgSrcI, setimgSrcI] = useState([
         {
             src : 'poke1.png',
@@ -117,6 +119,7 @@ const MainSection = () => {
         setimgSrcI(tempArray);
     }, []);
 
+
     const cardHandler = (e) => {
         tempArray.forEach((pokeObj, index, arr) => {
             let  randomIndex = Math.floor(Math.random() * (arr.length));
@@ -128,18 +131,25 @@ const MainSection = () => {
         setimgSrcI(tempArray);
 
         //Building Main Game Logic
-
-        let playerChoicesArray = [];
         console.log('Event Object --->', e.currentTarget.lastChild.textContent);
-        playerChoicesArray.push(e.currentTarget.lastChild.textContent);
+        // playerChoicesArray.push(e.currentTarget.lastChild.textContent);
         console.log('Player Choices--> ', playerChoicesArray);
-        
-        if(playerChoicesArray.length > 1){
-
-        }
-        else{
-
-        }
+           
+            // playerChoicesArray.push(e.currentTarget.lastChild.textContent);
+            if(playerChoicesArray.includes(e.currentTarget.lastChild.textContent)){
+                console.log('Nested If block--> Current Selection Matches one of the previous Selection.');
+                console.log('Game Over IF Block--->','Current Score-->', currentScore, 'Best Score-->', bestScore);
+                setBestScore(currentScore);
+                setCurrentScore(0);
+            }
+            else{
+                console.log('Players Choice --->', e.currentTarget.lastChild.textContent);
+                playerChoicesArray.push(e.currentTarget.lastChild.textContent);
+                setCurrentScore((currentScore + 1));
+                setBestScore(currentScore);
+                console.log('Game in progress--> ', 'Current Score--> ', currentScore, 'Best Score-->', bestScore);
+                console.log('Players Choices Array-->', playerChoicesArray);
+            }
     }
 
     return(
