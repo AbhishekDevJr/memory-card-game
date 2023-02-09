@@ -1,8 +1,11 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
+
+//Global Array that stores players choices
 let playerChoicesArray = [];
 
 const MainSection = (props) => {
+    //State Variables to dynamically store Scores and Image Src attributes/Names of Images
     const [currentScore, setCurrentScore] = useState(0);
     const [bestScore, setBestScore] = useState(0);
     const [prevBestScore, setPrevBestScore] = useState(0);
@@ -56,7 +59,7 @@ const MainSection = (props) => {
             name : 'Butterfree'
         }
     ]);
-
+    //Temporary Array that stores same content as ImgSrcI Array but is used to randomize and assign to ImgSrcI Array.
     let tempArray = [
         {
             src : 'poke1.png',
@@ -107,7 +110,7 @@ const MainSection = (props) => {
             name : 'Butterfree'
         },
 ];
-
+    //useEffect Hook used as componentDidMount lifecycle method that runs once at the time of mounting this component to randomize Images 
     useEffect(() => {
         tempArray.forEach((pokeObj, index, arr) => {
             let  randomIndex = Math.floor(Math.random() * (arr.length));
@@ -120,6 +123,7 @@ const MainSection = (props) => {
 
 
     const cardHandler = (e) => {
+        //Loop to randomize Images using tempArray every time user triggers On Click Event Listener or clicks a card.
         tempArray.forEach((pokeObj, index, arr) => {
             let  randomIndex = Math.floor(Math.random() * (arr.length));
             let temp = arr[index];
@@ -129,10 +133,10 @@ const MainSection = (props) => {
         
         setimgSrcI(tempArray);
 
-        //Building Main Game Logic
+        //Main Game logic that keeps track of currentScore, bestScore, prevBestScore by matching the players current choice previous choices
            
             if(playerChoicesArray.includes(e.currentTarget.lastChild.textContent)){
-                console.log('Game Over IF Block');
+                
                 if(prevBestScore === 0){
                     setPrevBestScore(currentScore);
                     setBestScore(currentScore);
@@ -153,7 +157,6 @@ const MainSection = (props) => {
                 playerChoicesArray = [];
             }
             else{
-                console.log('Game in progress ELSE block');
                 playerChoicesArray.push(e.currentTarget.lastChild.textContent);
                 setCurrentScore(currentScore + 1);
                 if(prevBestScore > 0){
@@ -167,26 +170,20 @@ const MainSection = (props) => {
                 else{
                     setBestScore(bestScore + 1);
                 }
-
-                if(bestScore === 12){
-                    props.changeScoreFun((currentScore+1), (bestScore));
-                }
-                else{
-                    props.changeScoreFun((currentScore+1), (bestScore+1));
-                }
                 
             }
     }
 
+    //Updates the Scores by calling the changeScoreFun function and passing the state score variables as arguments.
     useEffect(() => {
         if(currentScore > bestScore){
             setBestScore(currentScore);
         }
+        props.changeScoreFun((currentScore), (bestScore));
     }, [currentScore, bestScore]);
 
     return(
         <div className = "main-sec">
-            <h1>Current Score:-{currentScore} Best Score:-{bestScore}</h1>
             <div className = "main-container">
                 <div className = "row1">
                     <div onClick = {cardHandler} className = "card1">
