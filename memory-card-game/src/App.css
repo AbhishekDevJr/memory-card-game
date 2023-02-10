@@ -33,7 +33,7 @@ header {
 }
 
 .pokeball-outer1 {
-  outline : 6px solid rgb(56, 56, 56);
+  border : 6px solid rgb(56, 56, 56);
   width : 50px;
   height : 50px;
   background-color : white;
@@ -45,7 +45,7 @@ header {
 }
 
 .pokeball-inner1 {
-  outline : 4px solid rgb(56, 56, 56);
+  border : 4px solid rgb(56, 56, 56);
   width : 30px;
   height : 30px;
   border-radius : 50%;
@@ -119,6 +119,39 @@ header {
   font-size : 1.1rem;
 }
 
+footer {
+  background-color : rgb(56, 56, 56);
+}
+
+.social-container {
+  display : flex;
+  flex-direction : row;
+  justify-content : center;
+  align-items : center;
+}
+
+.social-links {
+  display : flex;
+  flex-direction : row;
+  justify-content : space-between;
+  align-items : center;
+  color : white;
+  width : 400px;
+  padding : 0 10px 0 10px;
+}
+
+.social-links img {
+  width : auto;
+  height : 40px;
+  transform : rotateZ(0deg);
+  transition : 0.3s;
+}
+
+.social-links img:hover{
+  transform : rotateZ(360deg);
+  transition : 0.3s;
+}
+
 @media(max-width : 760px) {
   .card4, .card8, .card12 {
     margin-top : 30px;
@@ -135,7 +168,7 @@ header {
   }
 }
 
-@media(max-width : 382px) {
+@media(max-width : 390px) {
   .card2, .card6, .card10 {
     /* margin-top : 30px; */
   }
@@ -147,7 +180,5 @@ header {
     width : 35%;
     height : 150px;
   }
-
-
 
 }

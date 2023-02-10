@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import Score from './components/Score';
 import MainSection from './components/MainSection';
+import FooterCred from './components/FooterCred';
 import './App.css';
 import {useState, useEffect} from 'react';
 
@@ -21,6 +22,7 @@ function App() {
       <Header />
       <Score testCurrScore = {currentScoreDis} testBestScore = {bestScoreDis}/>
       <MainSection changeScoreFun = {changeState} />
+      <FooterCred />
     </div>
   );
 }
